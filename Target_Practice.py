@@ -25,7 +25,6 @@ class Button:
         self.name_rect.center = self.location
         self.box_rect.center = self.location
         self.function = func
-        print(self.box_rect.size, self.location)
 
     def run(self):
         self.collision_check()
@@ -87,8 +86,8 @@ class TargetPractice:
         self.x, self.y = 750, 500
         self.screen = pygame.display.set_mode((self.x, self.y))
         pygame.display.set_caption("Target Practice")
-        self.heading_font = pygame.font.Font(".\\fonts\\AstronBoyWonder.ttf", 48)
-        self.regular_font = pygame.font.Font(".\\fonts\\basic_types\\Roboto-Medium.ttf", 24)
+        self.heading_font = pygame.font.Font("..\\fonts\\AstronBoyWonder.ttf", 48)
+        self.regular_font = pygame.font.Font("..\\fonts\\basic_types\\Roboto-Medium.ttf", 24)
         self.targets = []
         self.buttons = {
             "Game": [
@@ -172,8 +171,8 @@ class TargetPractice:
             hits = self.regular_font.render("Hits: {}".format(self.hits), False, WHITE)
             score_rect = score.get_rect()
             hits_rect = hits.get_rect()
-            self.screen.blit(score, score_rect)
-            self.screen.blit(hits, hits_rect)
+            self.screen.blit(score, (20, 20), score_rect)
+            self.screen.blit(hits, (20, 50), hits_rect)
 
 
 x = TargetPractice()
