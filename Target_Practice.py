@@ -100,6 +100,7 @@ class TargetPractice:
         }
         self.accuracy = 0
         self.hits = 0
+        self.missed = 0
         self.clicks = 0
         self.cooldown = 60 * 1
         self.scene = "Home"
@@ -145,7 +146,9 @@ class TargetPractice:
 
                 for i in self.targets:
                     i.run()
-                    if i.size <= 0: self.targets.remove(i)
+                    if i.size <= 0:
+                        self.targets.remove(i)
+                        self.missed += 1
             for i in self.buttons[self.scene]:
                 i.run()
             self.display_text(self.scene)
@@ -154,25 +157,31 @@ class TargetPractice:
 
     def instantiate_target(self):
         size = randint(20, 50)
-        location = (randint(size, self.x - size), randint(size, self.y - size))
+        location = (randint(size, self.x - size), randint(size + 50, self.y - size))
         self.targets.append(Target(self.screen, location, size, 3))
 
     def calc_accuracy(self, score):
-        self.accuracy = (self.accuracy * (self.clicks - 1) + score) // self.clicks
-        if self.clicks > 10: self.clicks = 10
+        clicks = self.clicks if self.clicks <= 10 else 10
+        self.accuracy = (self.accuracy * (clicks - 1) + score) // clicks
 
     def display_text(self, scene):
         if scene == "Home":
             heading_text = self.heading_font.render("Target Practice", False, WHITE)
             heading_text_rect = heading_text.get_rect()
-            self.screen.blit(heading_text, (self.x / 2 - 140, 150), heading_text_rect)
+            self.screen.blit(heading_text, (self.x / 2 - 150, 150), heading_text_rect)
         elif scene == "Game":
-            score = self.regular_font.render("Score: {}".format(self.accuracy), False, WHITE)
+            score = self.regular_font.render("Accuracy: {}".format(self.accuracy), False, WHITE)
             hits = self.regular_font.render("Hits: {}".format(self.hits), False, WHITE)
+            misclicks = self.regular_font.render("Misclicks: {}".format(self.clicks - self.hits), False, WHITE)
+            miss = self.regular_font.render("Miss: {}".format(self.missed), False, WHITE)
             score_rect = score.get_rect()
             hits_rect = hits.get_rect()
+            misclicks_rect = misclicks.get_rect()
+            miss_rect = miss.get_rect()
             self.screen.blit(score, (20, 20), score_rect)
-            self.screen.blit(hits, (20, 50), hits_rect)
+            self.screen.blit(hits, (200, 20), hits_rect)
+            self.screen.blit(misclicks, (20, 50), misclicks_rect)
+            self.screen.blit(miss, (200, 50), miss_rect)
 
 
 x = TargetPractice()
