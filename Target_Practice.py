@@ -86,8 +86,8 @@ class TargetPractice:
         self.x, self.y = 750, 500
         self.screen = pygame.display.set_mode((self.x, self.y))
         pygame.display.set_caption("Target Practice")
-        self.heading_font = pygame.font.Font("..\\fonts\\AstronBoyWonder.ttf", 48)
-        self.regular_font = pygame.font.Font("..\\fonts\\basic_types\\Roboto-Medium.ttf", 24)
+        self.heading_font = pygame.font.Font(".\\fonts\\AstronBoyWonder.ttf", 48)
+        self.regular_font = pygame.font.Font(".\\fonts\\basic_types\\Roboto-Medium.ttf", 24)
         self.targets = []
         self.buttons = {
             "Game": [
