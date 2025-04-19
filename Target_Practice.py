@@ -1,4 +1,4 @@
-import pygame
+import pygame #type: ignore
 from random import randint
 
 pygame.init()
